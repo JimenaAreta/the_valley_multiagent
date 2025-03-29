@@ -1,4 +1,0 @@
-agno
-openai
-duckduckgo-search
-python-dotenv

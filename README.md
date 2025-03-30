@@ -41,7 +41,7 @@ Proporcionar un entorno colaborativo con agentes automatizados para realizar tar
 ### 🔸 Paso 1: Clonar el repositorio
 
 ```bash
-git clone https://github.com/JimenaAreta/the_valley_multiagent.git
+git clone --single-branch --branch alumnos https://github.com/JimenaAreta/the_valley_multiagent.git
 cd the_valley_multiagent
 ```
 

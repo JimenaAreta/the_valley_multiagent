@@ -3,3 +3,6 @@
 uv.lock
 .python-version
 agents/__pycache__
+agent-ui
+*.pyc
+__pycache__

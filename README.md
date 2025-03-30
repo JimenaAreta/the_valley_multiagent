@@ -38,43 +38,44 @@ Proporcionar un entorno colaborativo con agentes automatizados para realizar tar
 
 ## ⚙️ Instalación y ejecución
 
-### 1. Clonar el repositorio:
+### 🔸 Paso 1: Clonar el repositorio
 
 ```bash
 git clone https://github.com/JimenaAreta/the_valley_multiagent.git
-cd nombre_del_proyecto
+cd the_valley_multiagent
 ```
 
-### 2. Configurar entorno virtual con `uv`:
+### 🔸 Paso 2: Configurar entorno virtual con `uv`
 
 ```bash
 uv venv
-source .venv/bin/activate - macos
-sourve .venv\Scripts\activate - windows   
+source .venv/bin/activate    # Windows: .venv\Scripts\activate
 ```
 
-### 3. Instalar dependencias con `uv`:
+### 🔸 Paso 3: Instalar dependencias con `uv`
 
 ```bash
 uv pip install -r pyproject.toml
 ```
 
-### 4. Configurar variables de entorno:
+### 🔸 Paso 4: Configurar variables de entorno
 
-Crea el archivo `.env` tomando como referencia `.env.example`.
+Crea el archivo `.env` usando `.env.example` como referencia:
 
 ```env
 OPENAI_API_KEY=tu_api_key
 # otras variables según necesidades del proyecto
 ```
 
-### 5. Ejecutar el proyecto localmente:
+### 🔸 Paso 5: Ejecutar Agno Playground
+
+Antes de configurar la interfaz Agent UI, es necesario tener funcionando Agno Playground (ir antes a la sección Agno Agent UI)
 
 ```bash
 python playground.py
 ```
 
-Una vez iniciado, visita la URL indicada en consola, usualmente:
+Una vez iniciado, visita la URL indicada en consola (usualmente):
 
 ```
 http://127.0.0.1:8000
@@ -82,36 +83,43 @@ http://127.0.0.1:8000
 
 ---
 
-## 📌 Descripción de la carpeta `agents`
+## 🔷 Agno Agent UI
 
-La carpeta `agents` contiene los agentes que conforman la inteligencia del proyecto:
+Una moderna interfaz de chat construida con Next.js, Tailwind CSS y TypeScript. Esta plantilla permite interactuar fácilmente con los agentes Agno.
 
-- **`planner.py`**: Agente especializado en planificación estratégica.
-- **`analyst.py`**: Realiza análisis profundo y crítico de información.
-- **`researcher.py`**: Responsable de la búsqueda e investigación automatizada.
-- **`editor.py`**: Mejora y corrige contenidos generados.
-- **`writer.py`**: Genera contenido escrito original.
-- **`team.py`**: Coordina y gestiona el trabajo en conjunto de todos los agentes.
+### 🚦 Instalación de Agent UI
+
+#### 🔹 Instalación automática (recomendada)
+
+Si no tienes instalado Node.js y npm:
+
+Para Windows - descargar en:
+https://nodejs.org
+
+Para MacOs:
+```bash
+brew install node
+```
+
+Una vez instalado:
+
+```bash
+npx create-agent-ui@latest
+```
+
+Luego entra al directorio generado y ejecuta:
+
+```bash
+cd agent-ui npm run dev
+```
+
+Una vez iniciado, visita:
+
+```
+http://localhost:3000
+```
 
 ---
-
-## 🛠️ Tecnologías Utilizadas
-
-- **Python**
-- **Agno**
-- **FastAPI**
-- **OpenAI**
-- **uv** (para gestión de dependencias y entorno virtual)
-- **Dotenv**
-
----
-
-## 📖 Documentación adicional
-
-- [Agno Docs](https://github.com/agno-ai/agno)
-- [FastAPI Docs](https://fastapi.tiangolo.com/)
-- [uv Docs](https://github.com/astral-sh/uv)
-- [OpenAI API](https://platform.openai.com/docs/api-reference)
 
 ## 📜 Licencia
 
@@ -119,4 +127,4 @@ Este proyecto está bajo la licencia MIT. Para más detalles, revisa el archivo 
 
 ---
 
-✨ **¡Disfruta desarrollando con Agno Playground!**
+✨ **¡Disfruta desarrollando con Agno Playground y Agent UI!**

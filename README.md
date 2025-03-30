@@ -121,10 +121,4 @@ http://localhost:3000
 
 ---
 
-## 📜 Licencia
-
-Este proyecto está bajo la licencia MIT. Para más detalles, revisa el archivo `LICENSE`.
-
----
-
 ✨ **¡Disfruta desarrollando con Agno Playground y Agent UI!**

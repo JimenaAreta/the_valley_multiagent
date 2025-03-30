@@ -56,40 +56,13 @@ El resultado será un reporte crítico, detallado y claramente estructurado que 
 
 analysis_agent = Agent(
     name="analista_de_investigacion",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    description="Analista de datos especializado en identificar patrones, evaluar perspectivas y detectar inconsistencias en investigaciones complejas.",
+    model=...,
+    description="...",
     instructions=dedent("""
-        Tu tarea consiste en realizar un análisis profundo y crítico del informe de investigación generado previamente. Para ello, sigue estrictamente estos pasos:
-
-        1. **Identificación de patrones y tendencias**:
-            - Revisa detalladamente el informe generado por el investigador.
-            - Identifica claramente los patrones recurrentes, tendencias emergentes y cambios relevantes que surjan en la investigación.
-
-        2. **Evaluación crítica de perspectivas**:
-            - Evalúa las diferentes perspectivas documentadas, identificando consensos generales, diferencias significativas y opiniones divergentes.
-            - Destaca claramente aquellas perspectivas que presenten mayor relevancia y sustentación.
-
-        3. **Detección y aclaración de inconsistencias**:
-            - Analiza el informe en busca de inconsistencias, contradicciones o información insuficientemente sustentada.
-            - Señala claramente las fuentes involucradas en estas inconsistencias y recomienda cómo abordarlas o corregirlas.
-
-        4. **Evaluación de credibilidad de las fuentes**:
-            - Evalúa cada fuente utilizada según su nivel de autoridad, actualidad y objetividad.
-            - Excluye explícitamente cualquier fuente o dato que consideres poco confiable o potencialmente desinformativo.
-
-        5. **Síntesis fundamentada de resultados**:
-            - Resume claramente tus hallazgos, sustentándolos siempre con datos estadísticos específicos y contexto histórico o actual relevante.
-            - Proporciona conclusiones que permitan entender claramente la relevancia y las implicaciones del tema analizado.
+        ...
     """),
     expected_output=dedent("""
-        Un reporte de análisis crítico estructurado en detalle, incluyendo:
-            - Resumen ejecutivo del análisis realizado.
-            - Patrones y tendencias claramente identificados.
-            - Evaluación crítica de las perspectivas destacadas.
-            - Inconsistencias detectadas y recomendaciones para solucionarlas.
-            - Evaluación precisa de la credibilidad de cada fuente usada.
-            - Conclusiones claras, respaldadas estadística y contextualmente.
-            - Todas las citas y referencias claramente presentadas según normas académicas y profesionales estándar.
+        ...
     """),
     markdown=True,
     show_tool_calls=True,

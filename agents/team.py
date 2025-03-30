@@ -79,63 +79,12 @@ El resultado será un informe completo, riguroso y estructurado sobre el tema co
 research_team = Agent(
     name="equipo_periodistico_multiagente",
     role="Ejecuta colaborativamente un flujo estructurado de investigación periodística profunda.",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    team=[research_planner, research_agent, analysis_agent, writing_agent, editor_agent],
-    instructions=dedent("""\
-        Tu función es coordinar y ejecutar de manera secuencial un flujo de trabajo estructurado para investigación periodística. Para ello, sigue estrictamente estos pasos:
-
-        1. **Asignación secuencial de tareas**:
-            - Coordina claramente el trabajo de cada agente según este orden:
-              a) Planificador → b) Investigador → c) Analista → d) Redactor → e) Editor.
-            - Asegúrate de que cada agente reciba claramente la información necesaria del agente anterior.
-
-        2. **Flujo continuo y consistente**:
-            - Garantiza que el resultado de un agente sirva como entrada clara y precisa para el siguiente agente.
-            - Monitorea que cada paso se complete adecuadamente antes de avanzar al siguiente.
-
-        3. **Informe final estructurado y completo**:
-            - Genera finalmente un informe periodístico exhaustivo, profesional y completo basado estrictamente en la versión editada del artículo proporcionado por el agente editorial.
-            - Asegúrate de que todas las citas, fuentes y referencias estén claramente documentadas.
-
-        Presenta el resultado final usando la estructura proporcionada a continuación.
+    model=...,
+    team=...,
+    instructions=dedent("""
+        ...
     """),
-    expected_output=dedent("""\
-        # {Titular atractivo y relevante} 📰
-
-        ## Resumen ejecutivo
-        {Descripción breve y precisa de los hallazgos más importantes y su relevancia}
-
-        ## Contexto y antecedentes
-        {Descripción del contexto histórico y relevancia del tema}
-        {Panorama actual claramente definido}
-
-        ## Hallazgos principales
-        {Principales descubrimientos y análisis crítico realizados}
-        {Citas destacadas y opiniones de expertos}
-        {Datos estadísticos clave que respaldan los hallazgos}
-
-        ## Análisis del impacto
-        {Implicaciones actuales del tema investigado}
-        {Perspectivas relevantes de actores clave o afectados}
-        {Impacto social, económico o sectorial claramente expuesto}
-
-        ## Perspectivas futuras
-        {Tendencias emergentes identificadas}
-        {Predicciones sustentadas por expertos}
-        {Potenciales desafíos y oportunidades futuras}
-
-        ## Opiniones de expertos
-        {Citas notables e interpretaciones relevantes de expertos en el área}
-        {Opiniones divergentes claramente expuestas}
-
-        ## Fuentes y metodología utilizada
-        {Lista completa de fuentes primarias utilizadas con enlaces directos}
-        {Descripción general del método de investigación empleado}
-
-        ---
-        Informe elaborado por el Periodista Investigativo IA  
-        Fecha de publicación: {fecha_actual}  
-        Última actualización: {hora_actual}
+    expected_output=dedent("""...
     """),
     markdown=True,
     show_tool_calls=True,

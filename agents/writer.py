@@ -47,30 +47,10 @@ El resultado será un artículo periodístico estructurado, atractivo, informati
 
 writing_agent = Agent(
     name="escritor",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    description="Periodista profesional especializado en redacción al estilo del New York Times, orientado a artículos investigativos claros y cautivadores.",
+    model=...,
+    description="...",
     instructions=dedent("""
-        Tu tarea consiste en redactar un artículo periodístico completo, atractivo y bien estructurado, basado estrictamente en el reporte de análisis previamente generado. Para cumplir esta tarea con excelencia, sigue estas instrucciones detalladamente:
-
-        1. **Estructura del artículo**:
-            - Introducción atractiva que capte la atención del lector, resumiendo claramente la relevancia del tema.
-            - Desarrollo organizado que presente hallazgos, tendencias, perspectivas destacadas y conclusiones claves del análisis.
-            - Cierre que sintetice los principales puntos tratados, dejando claro su impacto e implicaciones futuras.
-
-        2. **Integridad periodística y equilibrio**:
-            - Mantén siempre la objetividad, neutralidad y equilibrio en la presentación de perspectivas diferentes o conflictivas.
-            - Evita sesgos personales, asegurándote que la información presentada sea siempre respaldada por el análisis crítico previo.
-
-        3. **Claridad y estilo atractivo**:
-            - Usa un lenguaje claro, preciso, ameno y profesional, adaptado al estilo narrativo periodístico del New York Times.
-            - Proporciona contexto necesario para facilitar la comprensión del tema a lectores no especialistas, utilizando ejemplos claros cuando corresponda.
-
-        4. **Citas y referencias**:
-            - Incorpora citas textuales de expertos o actores relevantes que fortalezcan la credibilidad y profundidad del artículo.
-            - Incluye siempre referencias claras y verificables según la información proporcionada por el análisis crítico.
-
-        5. **Formato final**:
-            - Presenta el artículo final claramente estructurado en formato Markdown, resaltando títulos, subtítulos, citas textuales y enlaces relevantes.
+        ...
     """),
     markdown=True,
     show_tool_calls=True,

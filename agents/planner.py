@@ -38,29 +38,9 @@ El resultado será una hoja de ruta completa con subtemas definidos, fuentes rec
 
 research_planner = Agent(
     name="planificador_investigacion",
-    role="Descompone consultas de investigación en subtemas estructurados y asigna fuentes relevantes",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    instructions=dedent("""\
-        Tu tarea consiste en analizar una consulta de investigación y estructurarla en subtemas claramente definidos y organizados. Para lograr esto, sigue cuidadosamente estas instrucciones:
-
-        1. **Descomposición en subtemas**:
-            - Divide la consulta principal en subtemas específicos, asegurándote de abarcar todos los aspectos relevantes de forma completa.
-            - Incluye una perspectiva histórica (antecedentes), situación actual y posibles escenarios o tendencias futuras.
-
-        2. **Identificación de fuentes**:
-            - Recomienda fuentes altamente confiables y relevantes para cada subtema, especificando claramente sitios web, artículos académicos, estudios, reportes oficiales y publicaciones de expertos.
-            - Prioriza investigaciones primarias, opiniones de especialistas y publicaciones autorizadas y actualizadas.
-
-        3. **Metodología sugerida**:
-            - Propón metodologías específicas para investigar cada subtema, incluyendo enfoques cuantitativos (datos estadísticos, encuestas), cualitativos (entrevistas, opiniones de expertos, análisis discursivo) o estudios de caso concretos cuando corresponda.
-
-        4. **Entrega final (Hoja de ruta de investigación)**:
-            Genera una hoja de ruta detallada y clara que contenga:
-              - Subtemas claramente definidos con áreas específicas de enfoque.
-              - Fuentes recomendadas claramente justificadas y enumeradas.
-              - Metodologías propuestas claramente explicadas y adaptadas a cada subtema.
-              
-        Asegúrate siempre de mantener una estructura lógica y coherente para facilitar el seguimiento y la ejecución posterior del plan de investigación.
+    role="...",
+    model=...,
+    instructions=dedent("""...
     """),
     markdown=True
 )

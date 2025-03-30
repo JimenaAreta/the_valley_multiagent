@@ -69,70 +69,14 @@ incluyendo fuentes confiables, hallazgos documentados y tendencias identificadas
 
 research_agent = Agent(
     name="buscador_informacion",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    tools = [DuckDuckGoTools()],
-    description="Investigador experto que realiza búsquedas profundas en la web y verifica fuentes relevantes.",
+    model=...,
+    tools = ...,
+    description="...",
     instructions=dedent("""
-        Tu tarea consiste en llevar a cabo la investigación según la hoja de ruta previamente establecida. Debes seguir detalladamente estos pasos:
-
-        1. **Análisis del plan de investigación**:
-            - Lee cuidadosamente la hoja de ruta generada por el planificador de investigación.
-            - Asegúrate de comprender claramente cada subtema, las fuentes recomendadas y las metodologías sugeridas.
-
-        2. **Búsqueda en profundidad**:
-            - Realiza búsquedas web profundas utilizando DuckDuckGo para obtener información actualizada y relevante sobre cada subtema.
-            - Prioriza siempre fuentes autorizadas, recientes, primarias y secundarias confiables (informes académicos, estudios gubernamentales, artículos revisados por pares y medios especializados).
-
-        3. **Selección y verificación de fuentes**:
-            - Verifica la credibilidad, autoridad y actualidad de cada fuente.
-            - Selecciona solo aquellas fuentes que aporten información valiosa, objetiva y contrastable.
-
-        4. **Identificación de actores clave y perspectivas**:
-            - Identifica claramente actores relevantes (instituciones, expertos reconocidos, organismos, etc.) involucrados en cada subtema.
-            - Documenta diversas perspectivas, asegurando incluir tanto consensos generales como opiniones divergentes o controversiales.
-
-        5. **Elaboración del informe de investigación**:
-            - Genera un reporte estructurado según el formato detallado a continuación, incluyendo datos concretos, citas directas y resúmenes claros.
-
-        Sigue este formato estricto para la entrega final:
+        ...
     """),
     expected_output=dedent("""
-        # Informe de Investigación
-        
-        ## Tema investigado: {Tema de Investigación}
-        
-        ### Hallazgos principales
-        - **Hallazgo 1:** {Explicación detallada, apoyada con datos específicos}
-        - **Hallazgo 2:** {Explicación detallada, apoyada con datos específicos}
-        - **Hallazgo 3:** {Explicación detallada, apoyada con datos específicos}
-        
-        ### Análisis por fuente
-        #### Fuente 1: {Nombre de la fuente / URL}
-        - **Resumen:** {Resumen breve de los puntos clave}
-        - **Datos relevantes:** {Estadísticas importantes, fechas, cifras concretas}
-        - **Citas destacadas:** {Citas textuales de expertos, si están disponibles}
-        
-        #### Fuente 2: {Nombre de la fuente / URL}
-        - **Resumen:** {Resumen breve de los puntos clave}
-        - **Datos relevantes:** {Estadísticas importantes, fechas, cifras concretas}
-        - **Citas destacadas:** {Citas textuales de expertos, si están disponibles}
-
-        (…repetir este formato para cada fuente adicional…)
-
-        ### Tendencias y patrones generales
-        - **Consenso entre fuentes:** {Aspectos compartidos y recurrentes}
-        - **Opiniones divergentes:** {Perspectivas conflictivas y debates identificados}
-        - **Tendencias emergentes:** {Innovaciones, cambios potenciales o nuevos enfoques observados}
-
-        ### Citas y referencias completas
-        - [{Nombre de Fuente 1}]({URL})
-        - [{Nombre de Fuente 2}]({URL})
-        - (…enumerar claramente todas las fuentes utilizadas con enlaces directos…)
-
-        ---
-        Investigación realizada por el Periodista Investigativo IA  
-        Fecha de elaboración: {fecha_actual}  
-        Hora de elaboración: {hora_actual}
+        ...
     """),
     markdown=True,
     show_tool_calls=True,

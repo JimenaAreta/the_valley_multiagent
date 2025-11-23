@@ -1,10 +1,13 @@
 from agents import research_team
-from agno.playground import Playground, serve_playground_app
+from agno.os import AgentOS
 from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Playground(agents=[research_team]).get_app()
+agent_os = AgentOS(teams=[research_team])
+# Get the FastAPI app for the AgentOS
+app = agent_os.get_app()
 
+# ************* Run AgentOS *************
 if __name__ == "__main__":
-    serve_playground_app("playground:app", reload=True)
+    agent_os.serve(app="playground:app", reload=True)

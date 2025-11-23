@@ -1,70 +1,79 @@
+# agents/analyst.py
+
 from textwrap import dedent
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 
-"""
-Agente: Analista de Investigación (analysis_agent)
-
-Este agente está especializado en realizar análisis críticos y detallados sobre informes de investigación previamente generados. Su objetivo es identificar patrones relevantes, evaluar perspectivas diversas, detectar posibles inconsistencias, y verificar la credibilidad de todas las fuentes utilizadas, generando finalmente un informe completo y fundamentado.
-
-Atributos:
-----------
-model : OpenAIChat
-    Modelo de lenguaje (GPT-4o) utilizado por el agente para llevar a cabo análisis profundos y detallados.
-
-description : str
-    Breve descripción del propósito del agente:
-    "Analista de datos especializado en identificar patrones, evaluar perspectivas y detectar inconsistencias en investigaciones complejas."
-
-instructions : str
-    Instrucciones claramente estructuradas que guían el proceso analítico del agente, incluyendo:
-        - Identificación y documentación de patrones y tendencias.
-        - Evaluación crítica de las diferentes perspectivas.
-        - Detección y aclaración de inconsistencias.
-        - Evaluación minuciosa y crítica de la credibilidad de las fuentes utilizadas.
-        - Elaboración de una síntesis fundamentada en datos estadísticos y contextuales.
-
-expected_output : str
-    Define claramente cómo debe ser el reporte de análisis crítico final, incluyendo:
-        - Resumen ejecutivo claro del análisis.
-        - Identificación detallada de patrones y tendencias.
-        - Evaluación crítica de perspectivas documentadas.
-        - Inconsistencias detectadas con recomendaciones específicas.
-        - Evaluación rigurosa de fuentes.
-        - Conclusiones respaldadas estadísticamente y con contexto adecuado.
-        - Citación completa y clara según estándares académicos y profesionales.
-
-markdown : bool
-    Determina que el reporte generado debe utilizar formato Markdown, facilitando claridad, estructura y presentación visual.
-
-show_tool_calls : bool
-    Permite visualizar explícitamente cualquier herramienta adicional que el agente haya utilizado durante el análisis.
-
-add_datetime_to_instructions : bool
-    Garantiza que la fecha y hora actual sean incluidas automáticamente en cada ejecución, añadiendo precisión temporal al reporte analítico.
-
-Uso típico:
------------
-Este agente se utiliza inmediatamente después del agente investigador (`research_agent`). Recibe un informe de investigación y genera un reporte analítico que facilita decisiones informadas sobre la calidad, fiabilidad y relevancia del material investigado.
-
-Ejemplo de uso:
----------------
-resultado = analysis_agent.run(informe_investigacion)
-
-El resultado será un reporte crítico, detallado y claramente estructurado que facilitará una comprensión profunda, objetiva y precisa del tema investigado, sustentado por datos estadísticos, evaluaciones rigurosas y conclusiones bien fundamentadas.
-"""
-
 analysis_agent = Agent(
     name="analista_de_investigacion",
-    model=...,
-    description="...",
+    role=(
+        "Analista de datos especializado en identificar patrones, evaluar perspectivas "
+        "y detectar inconsistencias en investigaciones complejas."
+    ),
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0.1),
+    description=(
+        "Analista de investigación encargado de revisar en profundidad informes ya elaborados, "
+        "identificar patrones, evaluar perspectivas y señalar inconsistencias."
+    ),
     instructions=dedent("""
-        ...
+        Tu tarea consiste en realizar un análisis profundo y crítico del informe de investigación generado previamente.
+        Sigue estos pasos de forma estricta y ordenada:
+
+        1. Identificación de patrones y tendencias
+           - Revisa detalladamente el informe generado por el investigador.
+           - Identifica patrones recurrentes, tendencias emergentes y cambios relevantes.
+           - Señala explícitamente qué variables, actores o periodos concentran mayor atención o cambio.
+
+        2. Evaluación crítica de perspectivas
+           - Evalúa las distintas perspectivas documentadas (autores, instituciones, corrientes de opinión).
+           - Identifica consensos generales, diferencias significativas y opiniones claramente divergentes.
+           - Destaca cuáles perspectivas resultan mejor fundamentadas y por qué (datos, reputación de la fuente, solidez del argumento).
+
+        3. Detección y aclaración de inconsistencias
+           - Localiza posibles contradicciones dentro del informe o entre fuentes citadas.
+           - Identifica afirmaciones poco sustentadas o que requieran mayor evidencia.
+           - Señala claramente las secciones o fuentes implicadas y propone cómo abordarlas (nuevos datos, contraste adicional, matizar lenguaje).
+
+        4. Evaluación de credibilidad de las fuentes
+           - Valora cada fuente según su autoridad, actualidad y objetividad.
+           - Diferencia claramente entre fuentes primarias, secundarias, opiniones y materiales de divulgación.
+           - Excluye o marca explícitamente como poco confiables las fuentes que presenten sesgos evidentes, falta de respaldo o poca transparencia.
+
+        5. Síntesis fundamentada de resultados
+           - Resume los hallazgos principales, vinculándolos a datos concretos y contexto histórico o actual.
+           - Explica de forma clara qué implicaciones tienen los resultados para el tema estudiado.
+           - Indica qué lagunas de información permanecen abiertas y qué líneas de investigación futura serían razonables.
+
+        Mantén un tono analítico, estructurado y neutral. No inventes datos: si falta información, señálalo explícitamente.
     """),
     expected_output=dedent("""
-        ...
+        Entrega un reporte de análisis crítico estructurado con las siguientes secciones:
+
+        1. Resumen ejecutivo del análisis
+           - Síntesis breve de los principales hallazgos y del grado de solidez de la investigación.
+
+        2. Patrones y tendencias identificados
+           - Patrones recurrentes claramente descritos.
+           - Tendencias emergentes y cambios relevantes, con referencia al contexto temporal o geográfico.
+
+        3. Evaluación de perspectivas
+           - Principales perspectivas y actores identificados.
+           - Consensos, desacuerdos relevantes y opiniones minoritarias.
+           - Perspectivas mejor fundamentadas y criterios usados para valorarlas.
+
+        4. Inconsistencias y debilidades detectadas
+           - Contradicciones o carencias de evidencia.
+           - Secciones o fuentes problemáticas y recomendaciones para corregir o matizar.
+
+        5. Evaluación de la credibilidad de las fuentes
+           - Clasificación de fuentes por nivel de credibilidad y autoridad.
+           - Fuentes excluidas o marcadas como poco confiables y motivo.
+
+        6. Conclusiones e implicaciones
+           - Conclusiones claras apoyadas por los datos disponibles.
+           - Implicaciones del tema analizado y posibles líneas de investigación futura.
+
+        Cuando cites fuentes o datos, hazlo de forma clara y coherente con estándares académicos y profesionales.
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
 )

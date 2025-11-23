@@ -1,94 +1,82 @@
+# agents/team.py
+
 from textwrap import dedent
-from agno.agent import Agent
+from agno.team import Team
 from agno.models.openai import OpenAIChat
 
 from .planner import research_planner
 from .researcher import research_agent
 from .analyst import analysis_agent
 from .writer import writing_agent
-from .editor import editor_agent  
+from .editor import editor_agent
 
-from . import editor
-print(dir(editor)) 
-"""
-Agente: Equipo Periodístico Multi-agente (research_team)
-
-Este agente actúa como coordinador general y responsable de ejecutar integralmente un flujo estructurado de investigación periodística profunda. Gestiona y coordina un equipo de sub-agentes especializados en planificación, investigación, análisis, redacción y edición, asegurando que cada etapa del proceso fluya eficazmente hacia la siguiente, culminando en un informe periodístico completo, riguroso y claramente estructurado.
-
-Atributos:
-----------
-model : OpenAIChat
-    Modelo GPT-4o, ideal para gestionar flujos de trabajo complejos con múltiples agentes.
-
-name : str
-    Identidad profesional del equipo:
-    "Equipo periodístico multi-agente".
-
-role : str
-    Define claramente la función del agente en la coordinación del flujo de trabajo:
-    "Ejecuta colaborativamente un flujo estructurado de investigación periodística profunda."
-
-team : list
-    Lista secuencial de agentes especializados gestionados:
-        - research_planner: Planificador estratégico de la investigación.
-        - research_agent: Investigador web profundo.
-        - analysis_agent: Analista crítico del material investigado.
-        - writing_agent: Redactor periodístico profesional.
-        - editor_agent: Asistente editorial experto.
-
-instructions : str
-    Instrucciones claras sobre cómo gestionar el proceso:
-        - Asignar tareas secuencialmente entre agentes.
-        - Asegurar flujo de información consistente entre agentes.
-        - Generar informe final completo basado en la edición final del artículo.
-        - Garantizar la calidad y precisión de citas y referencias.
-
-expected_output : str
-    Formato detallado para la presentación del informe final, especificando claramente:
-        - Titular atractivo.
-        - Resumen ejecutivo.
-        - Contexto histórico y panorama actual.
-        - Principales hallazgos, citas y estadísticas.
-        - Análisis claro del impacto.
-        - Perspectivas futuras sustentadas por expertos.
-        - Opiniones contrastantes de expertos.
-        - Fuentes primarias claramente documentadas con enlaces.
-        - Metodología general utilizada en la investigación.
-
-markdown : bool
-    Garantiza que el informe final esté estructurado en Markdown para claridad visual y organizativa.
-
-show_tool_calls : bool
-    Permite visibilizar explícitamente herramientas externas utilizadas durante la ejecución del flujo investigativo.
-
-add_datetime_to_instructions : bool
-    Incluye automáticamente fecha y hora actual en cada ejecución, aportando precisión temporal al informe generado.
-
-Uso típico:
------------
-Este agente se emplea como coordinador general en procesos complejos de investigación periodística colaborativa, garantizando resultados consistentes, rigurosos y profesionales, listos para publicación inmediata.
-
-Ejemplo de uso:
----------------
-resultado = research_team.run("¿Qué impacto tienen las políticas económicas recientes en América Latina?")
-
-El resultado será un informe completo, riguroso y estructurado sobre el tema consultado, elaborado colaborativamente por el equipo de agentes especializados, listo para su difusión pública inmediata.
-"""
-
-
-research_team = Agent(
+research_team = Team(
     name="equipo_periodistico_multiagente",
     role="Ejecuta colaborativamente un flujo estructurado de investigación periodística profunda.",
-    model=...,
-    team=...,
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0),
+    members=[
+        research_planner,
+        research_agent,
+        analysis_agent,
+        writing_agent,
+        editor_agent,
+    ],
     instructions=dedent("""
-        ...
+        Tu función es coordinar y ejecutar de manera secuencial un flujo de trabajo de investigación periodística.
+        El orden lógico del flujo es:
+
+        1) Planificador de investigación
+        2) Investigador web
+        3) Analista
+        4) Redactor
+        5) Editor
+
+        Pautas de coordinación:
+        - El resultado de cada agente debe ser la entrada del siguiente.
+        - No saltes pasos ni mezcles roles: cada agente cumple su función específica.
+        - Asegúrate de que el redactor trabaje sobre el informe analítico consolidado.
+        - El editor recibe el artículo periodístico ya redactado y lo devuelve anotado.
+        - El informe final que presente este equipo debe basarse en la versión editada del artículo.
+
+        El resultado que devuelva este equipo será un informe periodístico completo, claro y estructurado,
+        listo para publicación, que incluya contexto, hallazgos, análisis de impacto, perspectivas futuras y fuentes.
     """),
-    expected_output=dedent("""...
+    expected_output=dedent("""
+        # {Titular atractivo y relevante}
+
+        ## Resumen ejecutivo
+        {Descripción breve de los hallazgos principales y por qué son importantes.}
+
+        ## Contexto y antecedentes
+        {Descripción del contexto histórico y del origen del problema o tema.}
+        {Panorama actual claramente definido.}
+
+        ## Hallazgos principales
+        {Principales descubrimientos respaldados por datos y fuentes.}
+        {Citas destacadas y opiniones de expertos relevantes.}
+
+        ## Análisis del impacto
+        {Implicaciones actuales del tema investigado: sociales, económicas, políticas o sectoriales.}
+        {Perspectivas de actores clave o grupos afectados.}
+
+        ## Perspectivas futuras
+        {Tendencias emergentes identificadas.}
+        {Escenarios plausibles a medio y largo plazo, si procede.}
+        {Principales riesgos y oportunidades.}
+
+        ## Opiniones y debates
+        {Resumen de las principales posiciones en conflicto, si las hay.}
+        {Puntos de consenso y desacuerdo entre expertos o fuentes.}
+
+        ## Fuentes y metodología
+        {Listado de las fuentes primarias más relevantes, con breve descripción.}
+        {Descripción general del enfoque metodológico seguido por el equipo.}
+
+        ---
+        Informe elaborado por el Equipo Periodístico Multiagente IA.
+        Fecha de publicación: {fecha_actual}
+        Última actualización: {hora_actual}
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
     debug_mode=True
 )
-

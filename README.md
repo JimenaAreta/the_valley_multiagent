@@ -81,44 +81,4 @@ Una vez iniciado, visita la URL indicada en consola (usualmente):
 http://127.0.0.1:8000
 ```
 
----
 
-## 🔷 Agno Agent UI
-
-Una moderna interfaz de chat construida con Next.js, Tailwind CSS y TypeScript. Esta plantilla permite interactuar fácilmente con los agentes Agno.
-
-### 🚦 Instalación de Agent UI
-
-#### 🔹 Instalación automática (recomendada)
-
-Si no tienes instalado Node.js y npm:
-
-Para Windows - descargar en:
-https://nodejs.org
-
-Para MacOs:
-```bash
-brew install node
-```
-
-Una vez instalado:
-
-```bash
-npx create-agent-ui@latest
-```
-
-Luego entra al directorio generado y ejecuta:
-
-```bash
-cd agent-ui npm run dev
-```
-
-Una vez iniciado, visita:
-
-```
-http://localhost:3000
-```
-
----
-
-✨ **¡Disfruta desarrollando con Agno Playground y Agent UI!**

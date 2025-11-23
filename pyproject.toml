@@ -1,7 +1,7 @@
 [project]
 name = "multiagents-agno"
 version = "0.1.0"
-description = "Add your description here"
+description = "Multiagente periodístico basado en Agno + AgentOS"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,4 +11,13 @@ dependencies = [
     "fastapi[standard]>=0.115.12",
     "openai>=1.69.0",
     "python-dotenv>=1.1.0",
+]
+
+[dependency-groups]
+dev = [
+    # Linter / formato / tests (opcional pero muy recomendable)
+    "ruff>=0.6.0",
+    "black>=24.0.0",
+    "pytest>=8.0.0",
+    "ipykernel>=6.29.0",
 ]

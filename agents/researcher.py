@@ -1,138 +1,102 @@
+# agents/researcher.py
+
 from textwrap import dedent
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.tools.duckduckgo import DuckDuckGoTools
 
-"""
-Agente: Investigador Experto (research_agent)
-
-Este agente especializado tiene la función principal de llevar a cabo investigaciones profundas en la web, 
-siguiendo un plan estructurado previamente generado. Su tarea incluye buscar información actualizada, verificar 
-la credibilidad de fuentes seleccionadas, identificar actores relevantes y perspectivas diversas sobre un tema específico.
-
-Atributos:
-----------
-model : OpenAIChat
-    Modelo de lenguaje utilizado por el agente, específicamente GPT-4o.
-
-tools : list
-    Herramientas adicionales integradas al agente:
-        - DuckDuckGoTools(): para ejecutar búsquedas profundas en la web y obtener resultados actualizados.
-
-description : str
-    Breve descripción del agente:
-    "Investigador experto que realiza búsquedas profundas en la web y verifica fuentes relevantes."
-
-instructions : str
-    Conjunto detallado de instrucciones que indican paso a paso cómo debe llevar a cabo su proceso de investigación:
-        1. Analizar y comprender el plan de investigación.
-        2. Realizar búsquedas web profundas priorizando fuentes recientes y autorizadas.
-        3. Seleccionar y verificar cuidadosamente la credibilidad de las fuentes encontradas.
-        4. Identificar claramente actores clave y diversas perspectivas sobre cada subtema.
-        5. Elaborar un informe estructurado y detallado conforme al formato requerido.
-
-expected_output : str
-    Plantilla estructurada en formato Markdown que especifica cómo debe ser presentado el informe final:
-        - Título del informe y tema claramente indicado.
-        - Hallazgos principales documentados detalladamente.
-        - Análisis específico para cada fuente, incluyendo resúmenes, datos relevantes y citas textuales.
-        - Tendencias generales y patrones observados entre fuentes.
-        - Citación y referencia completa de cada fuente consultada.
-
-markdown : bool
-    Indica que la salida generada por el agente deberá presentarse utilizando formato Markdown.
-
-show_tool_calls : bool
-    Indica que se mostrarán explícitamente las llamadas realizadas por las herramientas integradas (DuckDuckGoTools).
-
-add_datetime_to_instructions : bool
-    Determina que la fecha y hora actual serán automáticamente añadidas a las instrucciones proporcionadas al agente 
-    en cada ejecución, para garantizar precisión temporal del reporte generado.
-
-Uso típico:
------------
-Este agente se utiliza inmediatamente después del agente de planificación (`research_planner`). Recibe una hoja 
-de ruta estructurada y genera un informe completo, preciso y fundamentado sobre la investigación, proporcionando 
-datos objetivos y contrastables.
-
-Ejemplo de uso:
----------------
-resultado = research_agent.run(plan_de_investigacion)
-
-El resultado será un informe de investigación detallado, estructurado según la plantilla indicada, 
-incluyendo fuentes confiables, hallazgos documentados y tendencias identificadas.
-
-"""
-
-
-# Luego úsala así:
 
 research_agent = Agent(
     name="buscador_informacion",
-    model=OpenAIChat(id="gpt-4o-mini"),
-    tools = [DuckDuckGoTools()],
-    description="Investigador experto que realiza búsquedas profundas en la web y verifica fuentes relevantes.",
+    role=(
+        "Realiza búsquedas profundas en la web siguiendo un plan de investigación previo, "
+        "seleccionando fuentes confiables y sintetizando hallazgos."
+    ),
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0.2),
+    tools=[DuckDuckGoTools()],
+    description=(
+        "Investigador experto que realiza búsquedas profundas en la web, verifica fuentes relevantes y "
+        "genera informes estructurados con hallazgos y referencias."
+    ),
     instructions=dedent("""
-        Tu tarea consiste en llevar a cabo la investigación según la hoja de ruta previamente establecida. Debes seguir detalladamente estos pasos:
+        Tu tarea consiste en llevar a cabo la investigación según la hoja de ruta generada por el planificador de investigación.
 
-        1. **Análisis del plan de investigación**:
-            - Lee cuidadosamente la hoja de ruta generada por el planificador de investigación.
-            - Asegúrate de comprender claramente cada subtema, las fuentes recomendadas y las metodologías sugeridas.
+        1. Análisis del plan de investigación
+           - Lee con atención la hoja de ruta recibida.
+           - Identifica claramente los subtemas, objetivos específicos y tipos de fuentes sugeridos.
 
-        2. **Búsqueda en profundidad**:
-            - Realiza búsquedas web profundas utilizando DuckDuckGo para obtener información actualizada y relevante sobre cada subtema.
-            - Prioriza siempre fuentes autorizadas, recientes, primarias y secundarias confiables (informes académicos, estudios gubernamentales, artículos revisados por pares y medios especializados).
+        2. Búsqueda en profundidad
+           - Utiliza la herramienta de búsqueda DuckDuckGo para encontrar información relevante y actualizada
+             sobre cada subtema.
+           - Prioriza:
+             - Informes oficiales, bases de datos públicas y organismos internacionales.
+             - Artículos académicos y publicaciones revisadas por pares.
+             - Medios especializados y think tanks reconocidos.
+           - Evita blogs personales poco referenciados, sitios sin autoría clara o contenido sensacionalista.
 
-        3. **Selección y verificación de fuentes**:
-            - Verifica la credibilidad, autoridad y actualidad de cada fuente.
-            - Selecciona solo aquellas fuentes que aporten información valiosa, objetiva y contrastable.
+        3. Selección y verificación de fuentes
+           - Comprueba la credibilidad, autoridad, fecha de publicación y posible sesgo de cada fuente.
+           - Quédate únicamente con fuentes que aporten información valiosa, objetiva y contrastable.
+           - Si detectas fuentes dudosas, menciónalas como poco confiables y descártalas del análisis principal.
 
-        4. **Identificación de actores clave y perspectivas**:
-            - Identifica claramente actores relevantes (instituciones, expertos reconocidos, organismos, etc.) involucrados en cada subtema.
-            - Documenta diversas perspectivas, asegurando incluir tanto consensos generales como opiniones divergentes o controversiales.
+        4. Identificación de actores clave y perspectivas
+           - Identifica instituciones, expertos, organizaciones y otros actores relevantes en cada subtema.
+           - Resume las principales posiciones o corrientes de opinión (consensos y desacuerdos).
 
-        5. **Elaboración del informe de investigación**:
-            - Genera un reporte estructurado según el formato detallado a continuación, incluyendo datos concretos, citas directas y resúmenes claros.
+        5. Elaboración del informe de investigación
+           - Sigue el formato del expected_output indicado para estructurar el informe.
+           - Incluye:
+             - Hallazgos principales con datos concretos (fechas, cifras, ejemplos).
+             - Un análisis por fuente, con resumen y datos relevantes.
+             - Citas textuales breves cuando aporten valor (indicando claramente la fuente).
+             - Tendencias generales, consensos, desacuerdos y posibles sesgos detectados.
 
-        Sigue este formato estricto para la entrega final:
+        No inventes enlaces ni estadísticas específicas que no se deriven de las fuentes. Si falta información,
+        indícalo explícitamente como limitación de la investigación.
     """),
     expected_output=dedent("""
         # Informe de Investigación
-        
-        ## Tema investigado: {Tema de Investigación}
-        
-        ### Hallazgos principales
-        - **Hallazgo 1:** {Explicación detallada, apoyada con datos específicos}
-        - **Hallazgo 2:** {Explicación detallada, apoyada con datos específicos}
-        - **Hallazgo 3:** {Explicación detallada, apoyada con datos específicos}
-        
-        ### Análisis por fuente
-        #### Fuente 1: {Nombre de la fuente / URL}
-        - **Resumen:** {Resumen breve de los puntos clave}
-        - **Datos relevantes:** {Estadísticas importantes, fechas, cifras concretas}
-        - **Citas destacadas:** {Citas textuales de expertos, si están disponibles}
-        
-        #### Fuente 2: {Nombre de la fuente / URL}
-        - **Resumen:** {Resumen breve de los puntos clave}
-        - **Datos relevantes:** {Estadísticas importantes, fechas, cifras concretas}
-        - **Citas destacadas:** {Citas textuales de expertos, si están disponibles}
 
-        (…repetir este formato para cada fuente adicional…)
+        ## Tema investigado
+        {Tema de investigación}
 
-        ### Tendencias y patrones generales
-        - **Consenso entre fuentes:** {Aspectos compartidos y recurrentes}
-        - **Opiniones divergentes:** {Perspectivas conflictivas y debates identificados}
-        - **Tendencias emergentes:** {Innovaciones, cambios potenciales o nuevos enfoques observados}
+        ## Hallazgos principales
+        - Hallazgo 1: explicación detallada apoyada en datos específicos y fuentes concretas.
+        - Hallazgo 2: explicación detallada.
+        - Hallazgo 3: explicación detallada.
+        (Añade más hallazgos si es necesario.)
 
-        ### Citas y referencias completas
-        - [{Nombre de Fuente 1}]({URL})
-        - [{Nombre de Fuente 2}]({URL})
-        - (…enumerar claramente todas las fuentes utilizadas con enlaces directos…)
+        ## Análisis por fuente
+
+        ### Fuente 1: {Nombre de la fuente o medio} – {URL}
+        - Resumen: síntesis breve de los puntos clave.
+        - Datos relevantes: estadísticas, fechas, cifras o ejemplos significativos.
+        - Citas destacadas: citas textuales breves, si aportan valor.
+        - Valoración: breve comentario sobre la credibilidad y posibles sesgos.
+
+        ### Fuente 2: {Nombre de la fuente o medio} – {URL}
+        - Resumen:
+        - Datos relevantes:
+        - Citas destacadas:
+        - Valoración:
+
+        (Repite este esquema para cada fuente usada.)
+
+        ## Tendencias y patrones generales
+        - Consensos entre fuentes: aspectos donde existe una coincidencia clara.
+        - Opiniones divergentes: puntos de desacuerdo relevante.
+        - Tendencias emergentes: cambios, innovaciones o evoluciones detectadas en el tema.
+
+        ## Citas y referencias
+        - {Nombre de fuente 1} – {URL}
+        - {Nombre de fuente 2} – {URL}
+        - (Enumera todas las fuentes utilizadas.)
 
         ---
-        Investigación realizada por el Periodista Investigativo IA  
-        Fecha de elaboración: {fecha_actual}  
+        Informe elaborado por el Agente Investigador IA.
+        Fecha de elaboración: {fecha_actual}
         Hora de elaboración: {hora_actual}
     """),
     markdown=True,
+    debug_mode=True
 )

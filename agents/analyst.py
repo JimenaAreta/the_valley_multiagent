@@ -92,6 +92,4 @@ analysis_agent = Agent(
             - Todas las citas y referencias claramente presentadas según normas académicas y profesionales estándar.
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
 )

@@ -135,6 +135,4 @@ research_agent = Agent(
         Hora de elaboración: {hora_actual}
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
 )

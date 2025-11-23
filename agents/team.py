@@ -138,8 +138,6 @@ research_team = Agent(
         Última actualización: {hora_actual}
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
     debug_mode=True
 )
 

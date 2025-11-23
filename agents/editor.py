@@ -99,6 +99,4 @@ editor_agent = Agent(
         Asegúrate de mantener intactas las citas y referencias originales del artículo, resaltando cualquier inconsistencia detectada en ellas.
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
 )

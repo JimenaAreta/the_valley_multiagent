@@ -73,6 +73,4 @@ writing_agent = Agent(
             - Presenta el artículo final claramente estructurado en formato Markdown, resaltando títulos, subtítulos, citas textuales y enlaces relevantes.
     """),
     markdown=True,
-    show_tool_calls=True,
-    add_datetime_to_instructions=True,
 )

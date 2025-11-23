@@ -49,4 +49,5 @@ writing_agent = Agent(
         puedes mencionarlos como limitaciones del artículo.
     """),
     markdown=True,
+    debug_mode=True
 )

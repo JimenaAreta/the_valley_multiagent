@@ -41,4 +41,5 @@ research_planner = Agent(
         Mantén un tono claro, ordenado y orientado a la acción. No inventes datos concretos; céntrate en la estructura del trabajo.
     """),
     markdown=True,
+    debug_mode=True
 )

@@ -21,7 +21,6 @@ research_team = Team(
         writing_agent,
         editor_agent,
     ],
-    # 🔽 NUEVO
     add_team_history_to_members=True,
     num_team_history_runs=3,        # o más si quieres, p.ej. 5
     tool_call_limit=10,              # corta bucles de herramientas
